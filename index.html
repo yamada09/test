@@ -1,0 +1,39 @@
+# test
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    text-align: center;
+    margin-top: 50px;
+  }
+</style>
+</head>
+<body>
+  <h1>複数のウェブサイトを開く</h1>
+  <input type="text" id="urlInput" placeholder="URLを入力してください">
+  <button onclick="openWebsites()">ウェブサイトを開く</button>
+  <div id="websitesContainer"></div>
+  
+  <script>
+    function openWebsites() {
+      var url = document.getElementById('urlInput').value;
+      var numTabs = 5; // 開くタブの数
+      var reloadInterval = 5000; // リロード間隔（ミリ秒）
+
+      var container = document.getElementById('websitesContainer');
+      container.innerHTML = '';
+
+      for (var i = 0; i < numTabs; i++) {
+        var iframe = document.createElement('iframe');
+        iframe.src = url;
+        container.appendChild(iframe);
+        
+        setTimeout(function() {
+          iframe.contentWindow.location.reload(); // ページをリロード
+        }, reloadInterval);
+      }
+    }
+  </script>
+</body>
+</html>
