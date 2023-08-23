@@ -12,6 +12,7 @@
   <h1>複数のウェブサイトを開く</h1>
   <input type="text" id="urlInput" placeholder="URLを入力してください">
   <input type="number" id="numTabsInput" placeholder="開くウェブサイト数">
+  <input type="number" id="reloadIntervalInput" placeholder="リロード間隔（秒）">
   <button onclick="openWebsites()">ウェブサイトを開く</button>
   <div id="websitesContainer"></div>
   
@@ -19,7 +20,8 @@
     function openWebsites() {
       var url = document.getElementById('urlInput').value;
       var numTabs = parseInt(document.getElementById('numTabsInput').value) || 1;
-      
+      var reloadInterval = parseInt(document.getElementById('reloadIntervalInput').value) * 1000 || 5000; // ミリ秒単位
+
       var container = document.getElementById('websitesContainer');
       container.innerHTML = '';
 
@@ -27,6 +29,10 @@
         var iframe = document.createElement('iframe');
         iframe.src = url;
         container.appendChild(iframe);
+        
+        setInterval(function(iframe) {
+          iframe.contentWindow.location.reload(); // ページをリロード
+        }, reloadInterval, iframe);
       }
     }
   </script>
