@@ -1,4 +1,3 @@
-# test
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,15 +11,15 @@
 <body>
   <h1>複数のウェブサイトを開く</h1>
   <input type="text" id="urlInput" placeholder="URLを入力してください">
+  <input type="number" id="numTabsInput" placeholder="開くウェブサイト数">
   <button onclick="openWebsites()">ウェブサイトを開く</button>
   <div id="websitesContainer"></div>
   
   <script>
     function openWebsites() {
       var url = document.getElementById('urlInput').value;
-      var numTabs = 5; // 開くタブの数
-      var reloadInterval = 5000; // リロード間隔（ミリ秒）
-
+      var numTabs = parseInt(document.getElementById('numTabsInput').value) || 1;
+      
       var container = document.getElementById('websitesContainer');
       container.innerHTML = '';
 
@@ -28,10 +27,6 @@
         var iframe = document.createElement('iframe');
         iframe.src = url;
         container.appendChild(iframe);
-        
-        setTimeout(function() {
-          iframe.contentWindow.location.reload(); // ページをリロード
-        }, reloadInterval);
       }
     }
   </script>
